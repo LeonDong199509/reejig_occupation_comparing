@@ -1,0 +1,33 @@
+version: '3.9'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: reejig_occupation_api
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    command: --local-infile=1
+    restart: unless-stopped
+
+  app:
+    build: .
+    container_name: occupation_app
+    depends_on:
+      - mysql
+    environment:
+      PYTHONUNBUFFERED: 1
+    command: ./entrypoint.sh
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    restart: unless-stopped
+
+volumes:
+  mysql_data:

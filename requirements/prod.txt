@@ -1,0 +1,6 @@
+# Please sort the libraries alphabetically
+
+cryptography==45.0.2
+fastapi==0.115.12
+PyMySQL==1.1.0
+uvicorn==0.34.2

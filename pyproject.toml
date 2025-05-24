@@ -1,0 +1,30 @@
+[tool.isort]
+# Line length of import statements can be shorter(PEP8) than rest of the code.
+line_length = 80
+include_trailing_comma = true
+multi_line_output = 3
+sections = 'FUTURE,STDLIB,THIRDPARTY,FIRSTPARTY,LOCALFOLDER'
+profile = "black"
+skip_glob = ["venv/*"]
+
+
+
+[tool.black]
+line-length = 120
+skip-string-normalization = true
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | venv
+  | node_modules
+)/
+'''
